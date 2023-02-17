@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ProjectFilippov_2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ProjectFilippov_2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Postavchik">
           <Key>
             <PropertyRef Name="IDPostavchik" />
@@ -49,20 +49,8 @@
           <Property Name="NameTovar" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="KolichestvoTovara" Type="int" />
           <Property Name="Date" Type="date" />
-          <Property Name="IDSklada" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPostavchik" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Postavchik_Tovar">
-          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
-          <End Role="Postavchik" Type="Self.Postavchik" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tovar">
-              <PropertyRef Name="IDTovar" />
-            </Principal>
-            <Dependent Role="Postavchik">
-              <PropertyRef Name="IDTovar" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Proizvoditel_Tovar">
           <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
           <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="*" />
@@ -75,25 +63,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tovar_Postavchik">
+          <End Role="Postavchik" Type="Self.Postavchik" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postavchik">
+              <PropertyRef Name="IDPostavchik" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="IDPostavchik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище ProjectFilippov_2ModelContainer">
           <EntitySet Name="Postavchik" EntityType="Self.Postavchik" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proizvoditel" EntityType="Self.Proizvoditel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tovar" EntityType="Self.Tovar" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Postavchik_Tovar" Association="Self.FK_Postavchik_Tovar">
-            <End Role="Tovar" EntitySet="Tovar" />
-            <End Role="Postavchik" EntitySet="Postavchik" />
-          </AssociationSet>
           <AssociationSet Name="FK_Proizvoditel_Tovar" Association="Self.FK_Proizvoditel_Tovar">
             <End Role="Tovar" EntitySet="Tovar" />
             <End Role="Proizvoditel" EntitySet="Proizvoditel" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tovar_Postavchik" Association="Self.FK_Tovar_Postavchik">
+            <End Role="Postavchik" EntitySet="Postavchik" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectFilippov_2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProjectFilippov_2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Postavchik" EntityType="ProjectFilippov_2Model.Postavchik" />
+          <EntitySet Name="Proizvoditel" EntityType="ProjectFilippov_2Model.Proizvoditel" />
+          <EntitySet Name="sysdiagrams" EntityType="ProjectFilippov_2Model.sysdiagrams" />
+          <EntitySet Name="Tovar" EntityType="ProjectFilippov_2Model.Tovar" />
+          <AssociationSet Name="FK_Tovar_Postavchik" Association="ProjectFilippov_2Model.FK_Tovar_Postavchik">
+            <End Role="Postavchik" EntitySet="Postavchik" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proizvoditel_Tovar" Association="ProjectFilippov_2Model.FK_Proizvoditel_Tovar">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="Proizvoditel" EntitySet="Proizvoditel" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Postavchik">
           <Key>
             <PropertyRef Name="IDPostavchik" />
@@ -103,12 +116,12 @@
           <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Tel" Type="Int32" />
           <Property Name="Rekveziti" Type="Int32" />
-          <Property Name="NameTovar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameTovar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Articul" Type="Int32" />
           <Property Name="VidTovara" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="StoimostEdTovara" Type="Int32" />
           <Property Name="IDTovar" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tovar" Relationship="Self.FK_Postavchik_Tovar" FromRole="Postavchik" ToRole="Tovar" />
+          <NavigationProperty Name="Tovar" Relationship="ProjectFilippov_2Model.FK_Tovar_Postavchik" FromRole="Postavchik" ToRole="Tovar" />
         </EntityType>
         <EntityType Name="Proizvoditel">
           <Key>
@@ -120,13 +133,13 @@
           <Property Name="Tel" Type="Int32" />
           <Property Name="Rekveziti" Type="Int32" />
           <Property Name="IDTovar" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tovar" Relationship="Self.FK_Proizvoditel_Tovar" FromRole="Proizvoditel" ToRole="Tovar" />
+          <NavigationProperty Name="Tovar" Relationship="ProjectFilippov_2Model.FK_Proizvoditel_Tovar" FromRole="Proizvoditel" ToRole="Tovar" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -137,28 +150,28 @@
             <PropertyRef Name="IDTovar" />
           </Key>
           <Property Name="IDTovar" Type="Int32" Nullable="false" />
-          <Property Name="NameTovar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameTovar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="KolichestvoTovara" Type="Int32" />
           <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="IDSklada" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Postavchik" Relationship="Self.FK_Postavchik_Tovar" FromRole="Tovar" ToRole="Postavchik" />
-          <NavigationProperty Name="Proizvoditel" Relationship="Self.FK_Proizvoditel_Tovar" FromRole="Tovar" ToRole="Proizvoditel" />
+          <Property Name="IDPostavchik" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Postavchik" Relationship="ProjectFilippov_2Model.FK_Tovar_Postavchik" FromRole="Tovar" ToRole="Postavchik" />
+          <NavigationProperty Name="Proizvoditel" Relationship="ProjectFilippov_2Model.FK_Proizvoditel_Tovar" FromRole="Tovar" ToRole="Proizvoditel" />
         </EntityType>
-        <Association Name="FK_Postavchik_Tovar">
-          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
-          <End Role="Postavchik" Type="Self.Postavchik" Multiplicity="*" />
+        <Association Name="FK_Tovar_Postavchik">
+          <End Type="ProjectFilippov_2Model.Postavchik" Role="Postavchik" Multiplicity="1" />
+          <End Type="ProjectFilippov_2Model.Tovar" Role="Tovar" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tovar">
-              <PropertyRef Name="IDTovar" />
+            <Principal Role="Postavchik">
+              <PropertyRef Name="IDPostavchik" />
             </Principal>
-            <Dependent Role="Postavchik">
-              <PropertyRef Name="IDTovar" />
+            <Dependent Role="Tovar">
+              <PropertyRef Name="IDPostavchik" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proizvoditel_Tovar">
-          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
-          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="*" />
+          <End Type="ProjectFilippov_2Model.Tovar" Role="Tovar" Multiplicity="1" />
+          <End Type="ProjectFilippov_2Model.Proizvoditel" Role="Proizvoditel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tovar">
               <PropertyRef Name="IDTovar" />
@@ -168,20 +181,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProjectFilippov_2Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Postavchik" EntityType="Self.Postavchik" />
-          <EntitySet Name="Proizvoditel" EntityType="Self.Proizvoditel" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Tovar" EntityType="Self.Tovar" />
-          <AssociationSet Name="FK_Postavchik_Tovar" Association="Self.FK_Postavchik_Tovar">
-            <End Role="Tovar" EntitySet="Tovar" />
-            <End Role="Postavchik" EntitySet="Postavchik" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proizvoditel_Tovar" Association="Self.FK_Proizvoditel_Tovar">
-            <End Role="Tovar" EntitySet="Tovar" />
-            <End Role="Proizvoditel" EntitySet="Proizvoditel" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -191,50 +190,50 @@
           <EntitySetMapping Name="Postavchik">
             <EntityTypeMapping TypeName="ProjectFilippov_2Model.Postavchik">
               <MappingFragment StoreEntitySet="Postavchik">
-                <ScalarProperty Name="IDPostavchik" ColumnName="IDPostavchik" />
-                <ScalarProperty Name="NamePostavchik" ColumnName="NamePostavchik" />
-                <ScalarProperty Name="Adres" ColumnName="Adres" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Rekveziti" ColumnName="Rekveziti" />
-                <ScalarProperty Name="NameTovar" ColumnName="NameTovar" />
-                <ScalarProperty Name="Articul" ColumnName="Articul" />
-                <ScalarProperty Name="VidTovara" ColumnName="VidTovara" />
-                <ScalarProperty Name="StoimostEdTovara" ColumnName="StoimostEdTovara" />
                 <ScalarProperty Name="IDTovar" ColumnName="IDTovar" />
+                <ScalarProperty Name="StoimostEdTovara" ColumnName="StoimostEdTovara" />
+                <ScalarProperty Name="VidTovara" ColumnName="VidTovara" />
+                <ScalarProperty Name="Articul" ColumnName="Articul" />
+                <ScalarProperty Name="NameTovar" ColumnName="NameTovar" />
+                <ScalarProperty Name="Rekveziti" ColumnName="Rekveziti" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="NamePostavchik" ColumnName="NamePostavchik" />
+                <ScalarProperty Name="IDPostavchik" ColumnName="IDPostavchik" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Proizvoditel">
             <EntityTypeMapping TypeName="ProjectFilippov_2Model.Proizvoditel">
               <MappingFragment StoreEntitySet="Proizvoditel">
-                <ScalarProperty Name="IDProizvoditel" ColumnName="IDProizvoditel" />
-                <ScalarProperty Name="NameProizvoditel" ColumnName="NameProizvoditel" />
-                <ScalarProperty Name="Adres" ColumnName="Adres" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Rekveziti" ColumnName="Rekveziti" />
                 <ScalarProperty Name="IDTovar" ColumnName="IDTovar" />
+                <ScalarProperty Name="Rekveziti" ColumnName="Rekveziti" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="NameProizvoditel" ColumnName="NameProizvoditel" />
+                <ScalarProperty Name="IDProizvoditel" ColumnName="IDProizvoditel" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ProjectFilippov_2Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tovar">
             <EntityTypeMapping TypeName="ProjectFilippov_2Model.Tovar">
               <MappingFragment StoreEntitySet="Tovar">
-                <ScalarProperty Name="IDTovar" ColumnName="IDTovar" />
-                <ScalarProperty Name="NameTovar" ColumnName="NameTovar" />
-                <ScalarProperty Name="KolichestvoTovara" ColumnName="KolichestvoTovara" />
+                <ScalarProperty Name="IDPostavchik" ColumnName="IDPostavchik" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="IDSklada" ColumnName="IDSklada" />
+                <ScalarProperty Name="KolichestvoTovara" ColumnName="KolichestvoTovara" />
+                <ScalarProperty Name="NameTovar" ColumnName="NameTovar" />
+                <ScalarProperty Name="IDTovar" ColumnName="IDTovar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

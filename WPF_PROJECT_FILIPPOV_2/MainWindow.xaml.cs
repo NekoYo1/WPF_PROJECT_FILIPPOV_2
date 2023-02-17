@@ -23,6 +23,8 @@ namespace WPF_PROJECT_FILIPPOV_2
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new UchetTovarPage());
+            Manager.MainFrame = MainFrame;
         }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)

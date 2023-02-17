@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d1b0d51a257c4ab98e21b3e5ff3de04d" Name="Diagram1">
-        <EntityTypeShape EntityType="ProjectFilippov_2Model.Postavchik" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectFilippov_2Model.Proizvoditel" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectFilippov_2Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectFilippov_2Model.Tovar" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <AssociationConnector Association="ProjectFilippov_2Model.FK_Postavchik_Tovar" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectFilippov_2Model.FK_Proizvoditel_Tovar" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProjectFilippov_2Model.Postavchik" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="ProjectFilippov_2Model.Proizvoditel" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="ProjectFilippov_2Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ProjectFilippov_2Model.Tovar" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="ProjectFilippov_2Model.FK_Tovar_Postavchik" />
+        <AssociationConnector Association="ProjectFilippov_2Model.FK_Proizvoditel_Tovar" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

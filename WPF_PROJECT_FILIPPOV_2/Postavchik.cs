@@ -14,6 +14,12 @@ namespace WPF_PROJECT_FILIPPOV_2
     
     public partial class Postavchik
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Postavchik()
+        {
+            this.Tovar = new HashSet<Tovar>();
+        }
+    
         public int IDPostavchik { get; set; }
         public string NamePostavchik { get; set; }
         public string Adres { get; set; }
@@ -25,6 +31,7 @@ namespace WPF_PROJECT_FILIPPOV_2
         public Nullable<int> StoimostEdTovara { get; set; }
         public int IDTovar { get; set; }
     
-        public virtual Tovar Tovar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tovar> Tovar { get; set; }
     }
 }

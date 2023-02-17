@@ -17,7 +17,6 @@ namespace WPF_PROJECT_FILIPPOV_2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tovar()
         {
-            this.Postavchik = new HashSet<Postavchik>();
             this.Proizvoditel = new HashSet<Proizvoditel>();
         }
     
@@ -25,10 +24,9 @@ namespace WPF_PROJECT_FILIPPOV_2
         public string NameTovar { get; set; }
         public Nullable<int> KolichestvoTovara { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public int IDSklada { get; set; }
+        public int IDPostavchik { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Postavchik> Postavchik { get; set; }
+        public virtual Postavchik Postavchik { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proizvoditel> Proizvoditel { get; set; }
     }

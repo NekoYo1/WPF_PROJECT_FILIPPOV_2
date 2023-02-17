@@ -16,10 +16,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Background="Cyan" Grid.Column="0" Grid.RowSpan="2">
-            <Image Source="/Resources/Emblem.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="106"/>
-            <TextBlock FontSize="30" VerticalAlignment="Top" Text="Учет товаров" Margin="0,196,0,0"/>
-            <Button Content="Back" Name="BtnBack"  VerticalAlignment="Bottom" HorizontalAlignment="Right"  Click="BtnBack_Click"></Button>
-            <Frame NavigationUIVisibility="Hidden" Grid.Row="1" ContentRendered="MainFrame_ContentRendered" Name="MainFrame"></Frame>
+            <Image Source="/Resources/Emblem.png" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Height="100" Margin="0 10 0 0"/>
+            <TextBlock Text="Учет товаров" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
         </Grid>
+        <Frame x:Name="MainFrame" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </Window>
