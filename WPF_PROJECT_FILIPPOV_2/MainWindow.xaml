@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_PROJECT_FILIPPOV_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Учет товаров" Height="450" Width="800" Icon="Resources/Ico.png">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="185"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="Cyan" Grid.Column="0" Grid.RowSpan="2">
+            <Image Source="/Resources/Emblem.png" HorizontalAlignment="Left" VerticalAlignment="Top" Height="106"/>
+            <TextBlock FontSize="30" VerticalAlignment="Top" Text="Учет товаров" Margin="0,196,0,0"/>
+            <Button Content="Back" Name="BtnBack"  VerticalAlignment="Bottom" HorizontalAlignment="Right"  Click="BtnBack_Click"></Button>
+            <Frame NavigationUIVisibility="Hidden" Grid.Row="1" ContentRendered="MainFrame_ContentRendered" Name="MainFrame"></Frame>
+        </Grid>
     </Grid>
 </Window>
